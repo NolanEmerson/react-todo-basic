@@ -9,12 +9,30 @@ class App extends Component{
         super(props);
 
         this.state = {
-            list: listData
+            list: listData,
+            noItems: ''
         }
     }
     addItem(item){
         this.setState({
-            list: [...this.state.list, item]
+            list: [...this.state.list, item],
+            noItems: ''
+        })
+    }
+    deleteItem(index){
+        const newList = [...this.state.list];
+        newList.splice(index,1);
+        this.setState({
+            list: newList
+        },() => {
+            if(this.state.list.length == 0){
+                this.emptyText();
+            }
+        });
+    }
+    emptyText(){
+        this.setState({
+            noItems: 'No items on to-do list'
         })
     }
     
@@ -23,7 +41,8 @@ class App extends Component{
         <div className='container'>
             <h1 className='center'>To Do List</h1>
             <AddForm add={this.addItem.bind(this)} />
-            <List list={this.state.list} />
+            <List list={this.state.list} delete={this.deleteItem.bind(this)} />
+            <h3 className='center'>{this.state.noItems}</h3>
         </div>
         )
     }

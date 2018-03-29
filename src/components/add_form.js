@@ -31,7 +31,7 @@ class AddForm extends Component{
                     <input type='text' value={details} onChange={ e => this.setState({details: e.target.value})} />
                 </div>
                 <div className='center'>
-                    <button className='btn teal lighten-2'>Add Item</button>
+                    <button className='btn-floating teal lighten-2'><i className='material-icons'>add</i></button>
                 </div>
             </form>
         )
